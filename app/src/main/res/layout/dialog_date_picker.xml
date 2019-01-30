@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@color/date_picker_bg"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tv_cancel"
@@ -19,8 +19,7 @@
             android:padding="10dp"
             android:text="@string/cancel"
             android:textColor="@color/date_picker_text_light"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -30,8 +29,7 @@
             android:gravity="center"
             android:text="@string/title"
             android:textColor="@color/date_picker_text_light"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/tv_confirm"
@@ -41,8 +39,7 @@
             android:padding="10dp"
             android:text="@string/confirm"
             android:textColor="@color/date_picker_text_light"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

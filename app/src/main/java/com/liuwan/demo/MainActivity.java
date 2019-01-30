@@ -8,6 +8,9 @@ import android.widget.TextView;
 import com.liuwan.demo.datepicker.CustomDatePicker;
 import com.liuwan.demo.datepicker.DateFormatUtils;
 
+import java.util.Date;
+import java.util.zip.DataFormatException;
+
 /**
  * 说明：Demo
  * 作者：liuwan1992
@@ -56,10 +59,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void initDatePicker() {
-        long beginTimestamp = DateFormatUtils.str2Long("2009-05-01", false);
-        long endTimestamp = System.currentTimeMillis();
+//        long beginTimestamp = DateFormatUtils.str2Long("2009-01-01", false);
+//        long endTimestamp = DateFormatUtils.str2Long("2029-12-31", false);
+        String defaultPickTime = DateFormatUtils.long2Str(System.currentTimeMillis(), false);
 
-        mTvSelectedDate.setText(DateFormatUtils.long2Str(endTimestamp, false));
+        mTvSelectedDate.setText(defaultPickTime);
 
         // 通过时间戳初始化日期，毫秒级别
         mDatePicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
@@ -67,22 +71,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
             public void onTimeSelected(long timestamp) {
                 mTvSelectedDate.setText(DateFormatUtils.long2Str(timestamp, false));
             }
-        }, beginTimestamp, endTimestamp);
-        // 不允许点击屏幕或物理返回键关闭
-        mDatePicker.setCancelable(false);
-        // 不显示时和分
-        mDatePicker.setCanShowPreciseTime(false);
-        // 不允许循环滚动
-        mDatePicker.setScrollLoop(false);
-        // 不允许滚动动画
-        mDatePicker.setCanShowAnim(false);
+        }, false);
     }
 
     private void initTimerPicker() {
-        String beginTime = "2018-10-17 18:00";
-        String endTime = DateFormatUtils.long2Str(System.currentTimeMillis(), true);
+//        String beginTime = "2009-01-01 00:00";
+//        String endTime = "2029-12-31 23:59";
 
-        mTvSelectedTime.setText(endTime);
+        String defaultPickTime = DateFormatUtils.long2Str(System.currentTimeMillis(), true);
+        mTvSelectedTime.setText(defaultPickTime);
 
         // 通过日期字符串初始化日期，格式请用：yyyy-MM-dd HH:mm
         mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
@@ -90,15 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             public void onTimeSelected(long timestamp) {
                 mTvSelectedTime.setText(DateFormatUtils.long2Str(timestamp, true));
             }
-        }, beginTime, endTime);
-        // 允许点击屏幕或物理返回键关闭
-        mTimerPicker.setCancelable(true);
-        // 显示时和分
-        mTimerPicker.setCanShowPreciseTime(true);
-        // 允许循环滚动
-        mTimerPicker.setScrollLoop(true);
-        // 允许滚动动画
-        mTimerPicker.setCanShowAnim(true);
+        }, true);
     }
 
 }

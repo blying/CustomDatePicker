@@ -1,7 +1,9 @@
 package com.liuwan.demo.datepicker;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
@@ -56,6 +58,12 @@ public class DateFormatUtils {
         } else {
             return DATE_FORMAT_PATTERN_YMD;
         }
+    }
+
+    public static long addYear(int num) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, num);
+        return calendar.getTimeInMillis();
     }
 
 }

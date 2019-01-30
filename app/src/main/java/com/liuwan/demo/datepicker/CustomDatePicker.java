@@ -68,6 +68,10 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
         void onTimeSelected(long timestamp);
     }
 
+    public CustomDatePicker(Context context, Callback callback, boolean mCanShowPreciseTime) {
+        this(context, callback, DateFormatUtils.addYear(-10), DateFormatUtils.addYear(10), mCanShowPreciseTime);
+    }
+
     /**
      * 通过日期字符串初始换时间选择器
      *
@@ -76,9 +80,9 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
      * @param beginDateStr 日期字符串，格式为 yyyy-MM-dd HH:mm
      * @param endDateStr   日期字符串，格式为 yyyy-MM-dd HH:mm
      */
-    public CustomDatePicker(Context context, Callback callback, String beginDateStr, String endDateStr) {
+    public CustomDatePicker(Context context, Callback callback, String beginDateStr, String endDateStr, boolean mCanShowPreciseTime) {
         this(context, callback, DateFormatUtils.str2Long(beginDateStr, true),
-                DateFormatUtils.str2Long(endDateStr, true));
+                DateFormatUtils.str2Long(endDateStr, true), mCanShowPreciseTime);
     }
 
     /**
@@ -89,7 +93,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
      * @param beginTimestamp 毫秒级时间戳
      * @param endTimestamp   毫秒级时间戳
      */
-    public CustomDatePicker(Context context, Callback callback, long beginTimestamp, long endTimestamp) {
+    public CustomDatePicker(Context context, Callback callback, long beginTimestamp, long endTimestamp, boolean mCanShowPreciseTime) {
         if (context == null || callback == null || beginTimestamp <= 0 || beginTimestamp >= endTimestamp) {
             mCanDialogShow = false;
             return;
@@ -106,6 +110,14 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
         initView();
         initData();
         mCanDialogShow = true;
+        //设置是否显示时分
+        setCanShowPreciseTime(mCanShowPreciseTime);
+        // 设置是否允许点击屏幕或物理返回键关闭
+        setCancelable(true);
+        //设置是否允许循环滚动
+        setScrollLoop(false);
+        // 设置是否允许滚动动画
+        setCanShowAnim(false);
     }
 
     private void initView() {
